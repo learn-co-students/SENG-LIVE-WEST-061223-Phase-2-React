@@ -2,7 +2,7 @@
   --turquoise: #00efe1;
   --mid-turquoise: #14d5c9;
   --dark-turquoise: #00333f;
-  --black: #030416;
+  --black: hsl(237, 76%, 5%);
   --white: #f1f1f1;
   --grey: #d6e2e7;
   --dark-grey: #7f8a8e;
@@ -69,7 +69,7 @@ button.active,
 button:focus,
 button:hover {
   outline: none;
-  color: var(--white);
+  color: var(--background);
   background-color: var(--primary);
   border: 2px solid var(--primary);
 }
@@ -113,11 +113,31 @@ header {
   align-content: center;
 }
 
+header h1 {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
   color: var(--turquoise);
   font-size: 1.25em;
   font-family: Helvetica;
   margin-right: 0.5rem;
+}
+
+nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.navigation * {
+  margin: 0 0.5rem;
+}
+
+.branding {
+  display: flex;
 }
 
 /* forms */
