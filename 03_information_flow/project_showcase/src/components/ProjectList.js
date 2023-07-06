@@ -1,36 +1,37 @@
-import { useState } from 'react';
+import { useState } from "react";
 import ProjectListItem from "./ProjectListItem";
 
-const ProjectList = () => {
-  const [projects, setProjects] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("")
+const ProjectList = ({ projects, onLoadProjects }) => {
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleClick = () => {
-    loadProjects();
+    // loadProjects();
+    onLoadProjects();
   };
-  
-  const loadProjects = () => {
-    fetch("http://localhost:4000/projects")
-      .then((res) => res.json())
-      .then((projects) => setProjects(projects));
-  }
+
+  // const loadProjects = () => { // moved up to ProjectContainer and renamed
+  //   fetch("http://localhost:4000/projects")
+  //     .then((res) => res.json())
+  //     .then((projects) => setProjects(projects));
+  // }
 
   const handleSearch = (e) => {
-    setSearchQuery(e.target.value)
-  }
+    setSearchQuery(e.target.value);
+  };
 
-  const searchResults = projects.filter(project => {
-    return project.name.toLowerCase().includes(searchQuery.toLowerCase())
-  })
+  const searchResults = projects.filter((project) => {
+    return project.name.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
   const renderProjects = (projects) => {
-    return projects.map(project => (
+    return projects.map((project) => (
       <ProjectListItem
         key={project.id}
         {...project}
+        // project={project} // this could also work, but more destructuring required
       />
-    ))
-  }
+    ));
+  };
 
   return (
     <section>
@@ -45,11 +46,7 @@ const ProjectList = () => {
         <button>Phase 2</button>
         <button>Phase 1</button>
       </div>
-      <input
-        type="text"
-        placeholder="Search..."
-        onChange={handleSearch}
-      />
+      <input type="text" placeholder="Search..." onChange={handleSearch} />
 
       <ul className="cards">{renderProjects(searchResults)}</ul>
     </section>

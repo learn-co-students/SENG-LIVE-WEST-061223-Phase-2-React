@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+const Header = ({ isDarkMode, onToggleDarkMode }) => {
+  // const toggleDarkMode = () => { // moved to App and renamed onToggleDarkMode
+  //   setIsDarkMode(isDarkMode => !isDarkMode)
+  // }
 
-const Header = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(isDarkMode => !isDarkMode)
-  }
-
-  const handleToggleDarkMode = (e) => {
-    toggleDarkMode();
-  }
+  const handleToggleDarkMode = () => {
+    // toggleDarkMode();
+    onToggleDarkMode();
+  };
 
   return (
     <header>
@@ -17,9 +14,11 @@ const Header = () => {
         <span className="logo">{"//"}</span>
         Project Showcase
       </h1>
-      <button onClick={handleToggleDarkMode}>{isDarkMode ? "Light Mode" : "Dark Mode"}</button>
+      <button onClick={handleToggleDarkMode}>
+        {isDarkMode ? "Light Mode" : "Dark Mode"}
+      </button>
     </header>
   );
-}
+};
 
 export default Header;

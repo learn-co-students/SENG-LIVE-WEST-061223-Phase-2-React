@@ -1,12 +1,7 @@
 import { useState } from "react";
 
-const ProjectListItem = ({
-  image,
-  name,
-  about,
-  link,
-  phase
-}) => {
+const ProjectListItem = ({ image, name, about, link, phase }) => {
+  // const {image, name, about, link, phase} = project
 
   const [clapCount, setClapCount] = useState(0);
 
@@ -36,6 +31,6 @@ const ProjectListItem = ({
       </footer>
     </li>
   );
-}
+};
 
 export default ProjectListItem;
