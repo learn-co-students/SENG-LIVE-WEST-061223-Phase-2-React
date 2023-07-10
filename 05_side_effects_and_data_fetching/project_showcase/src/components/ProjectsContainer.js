@@ -10,14 +10,18 @@ function ProjectsContainer() {
 
   useEffect(() => {
       let url = "http://localhost:4000/projects"
-      if (selectedPhase) {
+      if (selectedPhase && searchQuery) {
+        url += `?phase=${selectedPhase}&q=${searchQuery}`
+      } else if (selectedPhase) {
         url += `?phase=${selectedPhase}`
+      } else if (searchQuery) {
+        url += `?q=${searchQuery}`
       }
       fetch(url)
         .then((res) => res.json())
         .then((projectsData) => setProjects(projectsData));
    
-  }, [selectedPhase])
+  }, [selectedPhase, searchQuery])
   
 
   const onAddProject = (project) => {
