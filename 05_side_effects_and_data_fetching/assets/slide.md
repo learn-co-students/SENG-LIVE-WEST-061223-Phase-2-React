@@ -84,7 +84,7 @@ The term 'side effect' not only applies to React but to all functional programmi
 
 ---
 
-<img src="./react-component-lifecycle.png" alt="React component lifecycle diagram" style="height: 80vh" />
+<img src="./react-component-lifecycle.png" alt="React component lifecycle diagram" style="height: 65vh" />
 
 ---
 
