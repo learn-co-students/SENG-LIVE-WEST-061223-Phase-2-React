@@ -87,6 +87,14 @@
       "phase": 4,
       "link": "https://gamesrx.netlify.app",
       "image": "https://i.imgur.com/Japzh6v.png"
+    },
+    {
+      "name": "Project Showcase",
+      "about": "cool projects here!",
+      "phase": "2",
+      "link": "https://phase-2-react-project-showcase.netlify.app/projects",
+      "image": "https://res.cloudinary.com/dv6zt4gxq/image/upload/v1688759211/Screenshot_2023-07-07_at_12.44.45_PM_yegyfn.png",
+      "id": 26
     }
   ]
 }

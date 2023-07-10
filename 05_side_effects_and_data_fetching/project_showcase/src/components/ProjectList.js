@@ -1,34 +1,49 @@
-import ProjectListItem from "./ProjectListItem";
-import { useState } from "react";
+import { useState } from 'react';
+import ProjectCard from "./ProjectCard";
 
-const ProjectList = ({ projects }) => {
-  const [searchQuery, setSearchQuery] = useState("");
+function ProjectList({ 
+  projects, 
+  onSelectPhase,
+  searchQuery,
+  onSearchChange
+ }) {
 
-  const searchResults = projects.filter((project) => {
-    return project.name.toLowerCase().includes(searchQuery.toLowerCase());
-  });
+  const handleSearchQueryChange = (e) => {
+    onSearchChange(e.target.value)
+  }
 
-  const projectListItems = searchResults.map((project) => (
-    <ProjectListItem key={project.id} {...project} />
-  ));
+  // const searchResults = projects.filter(project => {
+  //   return project.name.toLowerCase().includes(searchQuery.toLowerCase())
+  // })
 
-  const handleOnChange = (e) => setSearchQuery(e.target.value);
+  const projectCards = projects.map(project => (
+    <ProjectCard
+      key={project.id}
+      project={project}
+    />
+  ))
 
   return (
     <section>
+      {/* <button onClick={onLoadProjects}>Load Projects</button> */}
       <h2>Projects</h2>
-      {/* <h1>Count: {count}</h1> */}
-      <div className="filter">
-        <button>All</button>
-        <button>Phase 5</button>
-        <button>Phase 4</button>
-        <button>Phase 3</button>
-        <button>Phase 2</button>
-        <button>Phase 1</button>
-      </div>
-      <input type="text" placeholder="Search..." onChange={handleOnChange} />
 
-      <ul className="cards">{projectListItems}</ul>
+      <div className="filter">
+        <button onClick={() => onSelectPhase("")}>All</button>
+        <button onClick={() => onSelectPhase("5")}>Phase 5</button>
+        <button onClick={() => onSelectPhase("4")}>Phase 4</button>
+        <button onClick={() => onSelectPhase("3")}>Phase 3</button>
+        <button onClick={() => onSelectPhase("2")}>Phase 2</button>
+        <button onClick={() => onSelectPhase("1")}>Phase 1</button>
+      </div>
+      <input
+        type="text"
+        placeholder="Search..."
+        onChange={handleSearchQueryChange}
+        value={searchQuery}
+      />
+
+      <ul className="cards">{projectCards}</ul>
     </section>
   );
 };
