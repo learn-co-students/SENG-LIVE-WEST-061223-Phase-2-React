@@ -238,7 +238,7 @@ const Timer = () => {
 </small>
 
 
-  <img src="./react-component-lifecycle.png" alt="React component lifecycle diagram" style="height: 55vh" />
+  <img src="./react-component-lifecycle.png" alt="React component lifecycle diagram" style="height: 45vh" />
 
 ---
 
