@@ -29,7 +29,7 @@ function ProjectsContainer() {
     setProjects(projects => [...projects, savedProject]);
   }
   
-  const onUpdateProject = (updatedProject) => {
+  const onUpdateProject = () => {
     setProjectToEdit(null);
     // add code to update project in state
   };

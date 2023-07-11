@@ -23,7 +23,7 @@ function ProjectEditForm({ projectToEdit, onUpdateProject }) {
     // Add code here
     // optimistic version of PATCH update
     
-    onUpdateProject(formData);
+    onUpdateProject();
 
     // pessimistic version of PATCH update
    
