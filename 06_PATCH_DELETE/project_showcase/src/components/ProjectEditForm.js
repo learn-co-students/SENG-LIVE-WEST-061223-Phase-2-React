@@ -22,10 +22,21 @@ function ProjectEditForm({ projectToEdit, onUpdateProject }) {
     e.preventDefault();
     // Add code here
     // optimistic version of PATCH update
+    const config = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    }
+    // fetch(`http://localhost:4000/projects/${projectToEdit.id}`, config)
+    // onUpdateProject(formData);
     
-    onUpdateProject();
-
     // pessimistic version of PATCH update
+    fetch(`http://localhost:4000/projects/${projectToEdit.id}`, config)
+      .then(res => res.json())
+      .then(onUpdateProject)
+
    
   }
 

@@ -9,11 +9,20 @@ function ProjectCard({
 }) {
   const { id, image, about, name, link, phase, claps } = project;
 
-  const [clapCount, setClapCount] = useState(claps)
+  const url = `http://localhost:4000/projects/${id}`
 
   const handleClap = () => {
-    setClapCount(clapCount => clapCount + 1);
     // refactor to persist on backend
+    const config = {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ claps: claps + 1})
+    }
+    fetch(url, config)
+      .then(res => res.json())
+      .then(onUpdateProject)
   };
 
   const handleEditClick = () => {
@@ -23,8 +32,16 @@ function ProjectCard({
   const handleDeleteClick = () => {
     if (window.confirm("Are you sure you want to delete this project?")) { 
       // optimistic version of DELETE
-     
+      // fetch(`http://localhost:4000/projects/${id}`, { method: "DELETE"})
+      // onDeleteProject(id)
       // pessimistic version of DELETE
+      fetch(url, { method: "DELETE"})
+        .then(res => {
+          if(res.ok){
+            onDeleteProject(id)
+          }
+        })
+
       
     }
   };
@@ -34,7 +51,7 @@ function ProjectCard({
       <figure className="image">
         <img src={image} alt={name} />
         <button onClick={handleClap} className="claps">
-          👏{clapCount}
+          👏{claps}
         </button>
       </figure>
 

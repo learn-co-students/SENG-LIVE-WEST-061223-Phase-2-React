@@ -26,6 +26,18 @@ function ProjectList({
   const handleOnChange = (e) => setSearchInputText(e.target.value);
 
   // add useEffect to debounce search requests
+  useEffect(() => {
+    const scheduledUpdate = setTimeout(() => { 
+      console.log("scheduledUpdate")
+      setSearchQuery(searchInputText)
+    }, 500)
+  
+    return () => {
+      console.log("canceling previou update")
+      clearTimeout(scheduledUpdate)
+    }
+  }, [searchInputText])
+  
 
   return (
     <section>
@@ -39,7 +51,7 @@ function ProjectList({
         <button onClick={() => setSelectedPhase("2")}>Phase 2</button>
         <button onClick={() => setSelectedPhase("1")}>Phase 1</button>
       </div>
-      <input type="text" placeholder="Search..." onChange={handleOnChange} />
+      <input type="text" placeholder="Search..." onChange={handleOnChange} value={searchInputText}/>
 
       <ul className="cards">{projectCards}</ul>
     </section>
