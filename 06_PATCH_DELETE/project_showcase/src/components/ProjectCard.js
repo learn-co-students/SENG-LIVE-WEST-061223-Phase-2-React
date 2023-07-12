@@ -23,6 +23,12 @@ function ProjectCard({
     fetch(url, config)
       .then(res => res.json())
       .then(onUpdateProject)
+
+    // if we were going to do optimistic rendering, we could:
+    // onUpdate({
+    //   ...project,
+    //   claps: claps + 1
+    // })
   };
 
   const handleEditClick = () => {
