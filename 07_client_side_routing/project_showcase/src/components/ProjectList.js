@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 const ProjectList = ({
   projects,
-  onEditProject,
   onDeleteProject,
   setSelectedPhase,
   setSearchQuery
@@ -15,7 +14,6 @@ const ProjectList = ({
       <ProjectListItem
         key={project.id}
         project={project}
-        onEditProject={onEditProject}
         onDeleteProject={onDeleteProject}
       />
     );

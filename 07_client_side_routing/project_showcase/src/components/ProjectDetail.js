@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link, useParams } from 'react-router-dom'
+import { FaPencilAlt, FaTrash } from "react-icons/fa";
 
-const ProjectDetail = () => {
+const ProjectDetail = ({ onDeleteProject }) => {
   const [claps, setClaps] = useState(0);
   const [project, setProject] = useState(null);
 
-  const id = 1;
+  const { id } = useParams()
 
   useEffect(() => {
     fetch(`http://localhost:4000/projects/${id}`)
@@ -21,6 +23,13 @@ const ProjectDetail = () => {
   const handleClapClick = () => {
     setClaps((claps) => claps + 1);
   }
+
+  const handleDeleteClick = () => {
+    onDeleteProject(id)
+    fetch(`http://localhost:4000/projects/${id}`, {
+      method: "DELETE"
+    })
+  };
 
   return (
     <section>
@@ -41,10 +50,18 @@ const ProjectDetail = () => {
               </a>
             </p>
           ) : null}
-          <div className="extra">
-            <span className="badge blue">Phase {phase}</span>
-          </div>
         </div>
+          <footer className="extra">
+            <span className="badge blue">Phase {phase}</span>
+            <div className="manage">
+              <Link className="button" to={`/projects/${id}/edit`}>
+                <FaPencilAlt />
+              </Link>
+              <button onClick={handleDeleteClick}>
+                <FaTrash />
+              </button>
+            </div>
+          </footer>
       </div>
     </section>
   );

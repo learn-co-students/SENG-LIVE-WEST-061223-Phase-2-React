@@ -1,20 +1,34 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { Link } from 'react-router-dom'
 
 const ProjectListItem = ({
   project,
-  onEditProject,
   onDeleteProject,
 }) => {
-  const { id, image, about, name, link, phase } = project;
+  const { id, image, about, name, link, phase, isUpdated } = project;
 
   const [clapCount, setClapCount] = useState(0);
+  const ref = useRef(null)
 
-  const handleClap = (clapCount) => setClapCount(clapCount + 1);
+  const handleClap = () => setClapCount(clapCount + 1);
 
-  const handleEditClick = () => {
-    onEditProject(project);
-  };
+  const scrollToElement = () => {
+    ref.current?.scrollIntoView({ behavior: 'smooth'})
+  }
+
+  useEffect(() => {
+    if (isUpdated) {
+      scrollToElement()
+    }
+  
+    
+  }, [])
+  
+
+  // const handleEditClick = () => {
+  //   onEditProject(project);
+  // };
 
   const handleDeleteClick = () => {
     onDeleteProject(id)
@@ -24,9 +38,11 @@ const ProjectListItem = ({
   };
 
   return (
-    <li className="card">
+    <li ref={ref} className="card">
       <figure className="image">
-        <img src={image} alt={name} />
+        <Link to={`/projects/${id}`}>
+          <img src={image} alt={name} />
+        </Link>
         <button onClick={handleClap} className="claps">
           👏{clapCount}
         </button>
@@ -45,9 +61,9 @@ const ProjectListItem = ({
       <footer className="extra">
         <span className="badge blue">Phase {phase}</span>
         <div className="manage">
-          <button onClick={handleEditClick}>
+          <Link className="button" to={`/projects/${id}/edit`}>
             <FaPencilAlt />
-          </button>
+          </Link>
           <button onClick={handleDeleteClick}>
             <FaTrash />
           </button>

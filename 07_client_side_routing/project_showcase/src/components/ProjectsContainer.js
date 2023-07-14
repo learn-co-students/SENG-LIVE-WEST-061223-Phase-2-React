@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom'
 import ProjectList from './ProjectList';
 import ProjectEditForm from './ProjectEditForm';
 import ProjectForm from './ProjectForm';
+import ProjectDetail from './ProjectDetail'
 
 const ProjectsContainer = () => {
   const [projects, setProjects] = useState([]);
-  const [projectToEdit, setProjectToEdit] = useState(null);
   const [selectedPhase, setSelectedPhase] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -33,15 +34,31 @@ const ProjectsContainer = () => {
     setProjects((projects) => [...projects, newProj]);
   };
 
+  // const onUpdateProject = (updatedProject) => {
+  //   setProjects(projects => projects.map(originalProject => {
+  //     if (originalProject.id === updatedProject.id) {
+  //       return updatedProject;
+  //     } else {
+  //       return originalProject;
+  //     }
+  //   }))
+    
+  // };
   const onUpdateProject = (updatedProject) => {
     setProjects(projects => projects.map(originalProject => {
       if (originalProject.id === updatedProject.id) {
-        return updatedProject;
+        return {
+          ...updatedProject,
+          isUpdated: true
+        };
       } else {
-        return originalProject;
+        return {
+          ...originalProject,
+          isUpdated: false
+        };
       }
     }))
-    setProjectToEdit(null);
+    
   };
   
   const onDeleteProject = (deletedProjectId) => {
@@ -52,37 +69,46 @@ const ProjectsContainer = () => {
     }))
   }
   
-  const onEditProject = (projectToEdit) => {
-    setProjectToEdit(projectToEdit);
-  };
+  // const onEditProject = (projectToEdit) => {
+  //   setProjectToEdit(projectToEdit);
+  // };
   
-  const renderForm = () => {
-    if (projectToEdit) {
-      return (
-        <ProjectEditForm
-          projectToEdit={projectToEdit}
-          onUpdateProject={onUpdateProject}
-        />
-      );
-    } else {
-      return <ProjectForm onAddProject={onAddProject} />;
-    }
-  };
+  // const renderForm = () => {
+  //   if (projectToEdit) {
+  //     return (
+  //       <ProjectEditForm
+  //         projectToEdit={projectToEdit}
+  //         onUpdateProject={onUpdateProject}
+  //       />
+  //     );
+  //   } else {
+  //     return <ProjectForm onAddProject={onAddProject} />;
+  //   }
+  // };
 
 
   return (
-    <>
-      {renderForm()}
-      <ProjectList
+    <Switch>
+      <Route path="/projects/new">
+        <ProjectForm onAddProject={onAddProject}/>
+      </Route>
+      <Route path="/projects/:id/edit">
+        <ProjectEditForm onUpdateProject={onUpdateProject}/>
+      </Route>
+      <Route path="/projects/:id">
+        <ProjectDetail onDeleteProject={onDeleteProject}/>
+      </Route>
+      <Route path="/projects">
+=      <ProjectList
         projects={projects}
-        onEditProject={onEditProject}
         onUpdateProject={onUpdateProject}
         onDeleteProject={onDeleteProject}
         onSelectedPhaseChange={onSelectedPhaseChange}
         setSelectedPhase={setSelectedPhase}
         setSearchQuery={setSearchQuery}
       />
-    </>
+      </Route>
+    </Switch>
   )
 }
 
