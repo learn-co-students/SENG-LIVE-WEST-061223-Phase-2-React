@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const ProjectEditForm = ({ onUpdateProject }) => {
 
   const { id } = useParams()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     name: "",
@@ -42,7 +42,7 @@ const ProjectEditForm = ({ onUpdateProject }) => {
       .then((resp) => resp.json())
       .then((updatedProj) => {
         onUpdateProject(updatedProj);
-        history.push(`/projects/${id}`)
+        navigate(`/projects/${id}`)
       });
   };
 
