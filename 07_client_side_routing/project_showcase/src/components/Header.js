@@ -12,7 +12,7 @@ const Header = ({ isDarkMode, onToggleDarkMode }) => {
       </h1>
       <nav>
         <div className="navigation">
-          <NavLink className="button" to="/projects">
+          <NavLink className="button" to="/projects" end>
             All Projects
           </NavLink>
           <NavLink className="button" to="/projects/new">
