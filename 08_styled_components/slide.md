@@ -5,18 +5,17 @@ presentation:
   controls: false
 ---
 
-<!-- slide -->
 
 <h1> Styled Components </h1>
 
-<!-- slide -->
+---
 
 <h2><strong> ✅ Objectives </strong></h2>
 
 - Observe how styled-components are used for managing and organizing component styles
 - Observe how to pass props (i.e., as, theme) to dynamically render CSS for styled components
 
-<!-- slide style="text-align: left;" -->
+---
 
 
 ## Overview
@@ -41,7 +40,7 @@ function App() {
 }
 ```
 
-<!-- slide style="text-align: left;" -->
+---
 
 ## But...
 
@@ -63,13 +62,13 @@ styles. For example, styling CSS selectors like `:hover` and `:focus` won't work
 with this approach.
 
 
-<!-- slide style="text-align: left;" -->
+---
 
 ## A New Approach
 
 To solve these problems, a new kind of solution emerged, called CSS-in-JS, which allows developers to write their CSS code in JavaScript files alongside component code. The `styled-components` library is one of the most popular CSS-in-JS solutions out there, so let's see how it works!
 
-<!-- slide style="text-align: left;" -->
+---
 
 ## Using Styled components
 
@@ -108,5 +107,5 @@ function App() {
 
 [CodeSandbox](https://codesandbox.io/s/cool-chatterjee-90v3e7?file=/src/App.js:270-1073)
 
-<!-- slide style="text-align: left;" -->
+<!-- refactors slides to render, but all slide content is in workshop -->
 
